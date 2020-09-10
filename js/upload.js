@@ -323,6 +323,14 @@ document.getElementById('faceswapSrcFileUpload').addEventListener('change', hand
 document.getElementById('mobilenetv2FileUpload').addEventListener('change', handleFileSelectMobilenet, false);
 document.getElementById('resnet34FileUpload').addEventListener('change', handleFileSelectResnet, false);
 document.getElementById('poseEstimationFileUpload').addEventListener('change', handleFileSelectPoseEstimation, false);
+
+document.getElementById("classification").style.display = "none";
+document.getElementById("facedetect").style.display = "none";
+document.getElementById("facerecognition").style.display = "none";
+document.getElementById("poseestimation").style.display = "none";
+document.getElementById("imagecontainer").style.display = "block";
+
+
 $(function() {
     $('a.popper').hover(function() {
         $('#pop').toggle();
@@ -362,32 +370,25 @@ document.getElementById("about").style.display = "none";
 document.getElementById("poseestimation").style.display = "none";
 }
 
-function facerecognition(){
-document.getElementById("classification").style.display = "none";
-document.getElementById("about").style.display = "none";
-document.getElementById("facerecognition").style.display = "none";
+
+function displayhome(){
+document.getElementById("imagecontainer").style.display = "block";
+
+document.getElementById("resnet34").style.display = "none";
+document.getElementById("mobilenetV2").style.display = "none";
 document.getElementById("facealignment").style.display = "none";
-document.getElementById("facerecognition").style.display = "block";
+document.getElementById("facerecognition").style.display = "none";
 document.getElementById("faceswap").style.display = "none";
-
 document.getElementById("poseestimation").style.display = "none";
-}
-
-
-function home(){
-document.getElementById("faceapp").style.display = "block";
+document.getElementById("faceapp").style.display = "none";
 document.getElementById("about").style.display = "none";
-document.getElementById("classification").style.display = "block";
-document.getElementById("resnet34").style.display = "block";
-document.getElementById("mobilenetV2").style.display = "block";
-document.getElementById("facealignment").style.display = "block";
-document.getElementById("facerecognition").style.display = "block";
-document.getElementById("faceswap").style.display = "block";
+document.getElementById("classification").style.display = "none"; //keep it last
 
-document.getElementById("poseestimation").style.display = "block";
 }
 
+/*
 function facealignment(){
+
 document.getElementById("classification").style.display = "none";
 document.getElementById("about").style.display = "none";
 document.getElementById("facerecognition").style.display = "none";
@@ -397,22 +398,15 @@ document.getElementById("faceswap").style.display = "none";
 
 document.getElementById("poseestimation").style.display = "none";
 }
+*/
 
 
-function faceswap(){
-document.getElementById("classification").style.display = "none";
-document.getElementById("about").style.display = "none";
-document.getElementById("facerecognition").style.display = "none";
-document.getElementById("facealignment").style.display = "none";
-document.getElementById("facerecognition").style.display = "none";
-document.getElementById("faceswap").style.display = "block";
-
-document.getElementById("poseestimation").style.display = "none";
-}
 
 
 
 function displayclassification(){
+document.getElementById("imagecontainer").style.display = "none";
+	
 document.getElementById("about").style.display = "none";	
 document.getElementById("classification").style.display = "block";
 document.getElementById("mobilenetV2").style.display = "block";
@@ -422,8 +416,9 @@ document.getElementById("poseestimation").style.display = "none";
 document.getElementById("facealignment").style.display = "none";
 document.getElementById("faceswap").style.display = "none";
 
-
 }
+
+
 function resnet(){
 displayclassification();
 document.getElementById("resnet34").style.display = "block";
@@ -431,20 +426,75 @@ document.getElementById("mobilenetV2").style.display = "none";
 }
 
 function mobilenet(){
-displayclassification();
+displayclassification()
 document.getElementById("resnet34").style.display = "none";
 document.getElementById("mobilenetV2").style.display = "block";
 }
 
 
 function poseestimation(){
+document.getElementById("imagecontainer").style.display = "none";
+
 document.getElementById("classification").style.display = "none";
 document.getElementById("about").style.display = "none";
 document.getElementById("facerecognition").style.display = "none";
 document.getElementById("facealignment").style.display = "none";
-document.getElementById("facerecognition").style.display = "none";
 document.getElementById("faceswap").style.display = "none";
 
 document.getElementById("poseestimation").style.display = "block";
 }
 
+function facedetect(){
+document.getElementById("imagecontainer").style.display = "none";
+
+document.getElementById("classification").style.display = "none";
+document.getElementById("about").style.display = "none";
+document.getElementById("facerecognition").style.display = "none";
+document.getElementById("poseestimation").style.display = "none";
+document.getElementById("facealignment").style.display = "block";
+document.getElementById("faceswap").style.display = "block";
+document.getElementById("facedetect").style.display = "block";
+
+}
+
+
+function faceswap(){
+document.getElementById("imagecontainer").style.display = "none";
+
+document.getElementById("classification").style.display = "none";
+document.getElementById("about").style.display = "none";
+document.getElementById("facerecognition").style.display = "none";
+document.getElementById("facealignment").style.display = "none";
+document.getElementById("poseestimation").style.display = "none";
+document.getElementById("faceswap").style.display = "block";
+document.getElementById("facedetect").style.display = "block";
+
+}
+
+function facealignment(){
+document.getElementById("imagecontainer").style.display = "none";
+
+document.getElementById("classification").style.display = "none";
+document.getElementById("about").style.display = "none";
+document.getElementById("facerecognition").style.display = "none";
+document.getElementById("faceswap").style.display = "none";
+document.getElementById("poseestimation").style.display = "none";
+document.getElementById("facealignment").style.display = "block";
+document.getElementById("facerecognition").style.display = "none";
+
+document.getElementById("facedetect").style.display = "block";
+
+}
+
+
+function facerecognition(){
+document.getElementById("imagecontainer").style.display = "none";
+
+document.getElementById("classification").style.display = "none";
+document.getElementById("about").style.display = "none";
+document.getElementById("facealignment").style.display = "none";
+document.getElementById("faceswap").style.display = "none";
+document.getElementById("poseestimation").style.display = "none";
+document.getElementById("facerecognition").style.display = "block";
+
+}
