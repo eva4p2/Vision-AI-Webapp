@@ -430,8 +430,9 @@ document.getElementById("generators").style.display = "none";
 
 document.getElementById("imagecontainer").style.display = "block";
 
-displayhome();
+//displayhome();
 //generators()
+poseestimation()
 $(function() {
     $('a.popper').hover(function() {
         $('#pop').toggle();

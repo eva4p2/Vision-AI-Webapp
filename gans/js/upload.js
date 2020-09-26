@@ -430,8 +430,8 @@ document.getElementById("generators").style.display = "none";
 
 document.getElementById("imagecontainer").style.display = "block";
 
-displayhome();
-//generators()
+//displayhome();
+generators()
 $(function() {
     $('a.popper').hover(function() {
         $('#pop').toggle();

@@ -212,6 +212,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
     </div>
   </div>
   
+  
+  <div class="dropdown">
+    <button class="dropbtn"  onclick="generators()">Generators
+      <i class="fa fa-caret-down"></i>
+    </button>
+      <div class="dropdown-content">
+      <a href="#gans" onclick="gans()">Generative Adversial Networks (GANS)</a>
+      <a href="#vae" onclick="vae()">Variatonal Auto Encoders (VAE)</a>
+    </div>
+  </div>
+  
+  
 </div>
 
 <div id="imagecontainer">
@@ -221,13 +233,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div id="resnet34Img" class="resnet">
 	<p class="sessionHeader" style="font-size:15px">Image Classification Using resnet34 model (Click on Image)</p>
- <img src="images/resnet34.PNG" alt="RESNET34" width="30%" height="70%" onclick="resnet()">
+ <img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/resnet34.png" alt="RESNET34" width="30%" height="70%" onclick="resnet()">
 </div>
 
 
 <div id="mobilenetV2Img" class="resnet">
 <p class="sessionHeader" style="font-size:15px">Image Classification Using mobilenetV2 model (Click on Image)</p>
- <img src="images/mobilenet.PNG" alt="RESNET34" width="30%" height="70%" onclick="mobilenet()">
+ <img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/mobilenet.png" alt="MobelenetV2" width="30%" height="70%" onclick="mobilenet()">
 </div>
 </div>
 </div>
@@ -240,14 +252,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div id="facealignmentImage" class="resnet">
 <p class="sessionHeader" style="font-size:15px">Face Alignment using Dlib</p>
-<img src="images/facealignment.JFIF" alt="" width="30%" height="70%" onclick="facealignment()">
+<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/facealignment.jfif" alt="" width="30%" height="70%" onclick="facealignment()">
 </div>
 
 <div id="faceswapImage" class="resnet">
 <div>
 	<p class="sessionHeader" style="font-size:15px">Face Swap</p>
 </div>
-<img src="images/faceswap.JFIF" alt="" width="30%" height="70%" onclick="faceswap()">
+<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/faceswap.jfif" alt="" width="30%" height="70%" onclick="faceswap()">
 </div>
 </div>
 </div>
@@ -257,15 +269,30 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div id="facerecognitionhpeImage" class="flex-container">
 <div id="facerecognitionImage" class="resnet">
 	<p class="sessionHeader" style="font-size:15px">Face Recognition ..Under deployment</p>
-<img src="images/facerecognition.JFIF" alt="" width="30%" height="70%" onclick="facerecognition()">
+<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/facerecognition.jfif" alt="" width="30%" height="70%" onclick="facerecognition()">
 </div>
 
 <div id="poseestimationImage" class="resnet">
 	<p class="sessionHeader" style="font-size:15px">Human Pose Estimation</p>
-	<img src="images/hpe.JFIF" alt="" width="30%" height="70%" onclick="poseestimation()">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/hpe.jfif" alt="" width="30%" height="70%" onclick="poseestimation()">
 </div>
 </div>
 </div>
+
+<div class="flex-child">
+<div id="gansImage" class="flex-container">
+<div id="gansImage" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Generative Adversial Networks (GANS)</p>
+<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/gans.png" alt="" width="35%" height="70%" onclick="gans()">
+</div>
+
+<div id="vaeImage" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Variational Auto Encoders (VAE)</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/vae.png" alt="" width="35%" height="70%" onclick="vae()">
+</div>
+</div>
+</div>
+
 </div>
 
 
@@ -275,8 +302,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div id="resnet34" class="resnet">
 	
 <form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/resnet34.png" alt="RESNET34" width="10%" height="20%">
 	<p class="sessionHeader" style="font-size:20px">Image Classification Using resnet34 model</p>
-
+	
   <output id="filePreviewResnet"></output>
    
   <label class ="label" for="resnet34FileUpload"> </label><br><br>
@@ -290,6 +318,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
  <div id="mobilenetV2" class="mobilenet">
 <form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/mobilenet.png" alt="MobelenetV2" width="10%" height="20%">
 	<p class="sessionHeader" style="font-size:20px">Image Classification Using mobilenetv2 model</p>
   <output id="filePreviewMobilenet"></output>
   
@@ -307,6 +336,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div id="facealignment" class="resnet">
 <form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/facealignment.jfif" alt="" width="10%" height="20%">
 	<p class="sessionHeader" style="font-size:20px">Face Alignment using Dlib</p>
 	<output id="filePreviewFaceAlignment"></output>
   
@@ -322,6 +352,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div id="faceswap" class="resnet">
 <form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/faceswap.jfif" alt="" width="10%" height="20%">
 	<p class="sessionHeader" style="font-size:20px">Face Swap</p>
   <label class ="label" for="faceswapSrcFileUpload"></label><br><br>
   
@@ -342,6 +373,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div class="flex-container">
 <div id="facerecognition" class="resnet">
 <form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/facerecognition.jfif" alt="" width="10%" height="20%">
 	<p class="sessionHeader" style="font-size:20px">Face Recognition ..Under deployment</p>
   <output id="filePreviewFaceRecognition"></output>
   
@@ -355,6 +387,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div id="poseestimation" class="resnet">
 <form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/hpe.jfif" alt="" width="10%" height="20%">
 	<p class="sessionHeader" style="font-size:20px">Human Pose Estimation</p>
   <output id="filePreviewPoseEstimation"></output>
   
@@ -363,27 +396,77 @@ body {font-family: Arial, Helvetica, sans-serif;}
   
   <input type="button" id="poseEstimationFileUploadBtn" class="button" value="Estimate Human Pose">
 </form>
+<img id="poseestimationImageResult" src="" width="150" > Pose Estimation Result: </img>
 <p id="poseestimationresult"></p>
 
 </div>
 
 </div>
 
-<div id="about" class="about">
-<h1 class="header1">TSAI Page of EVA4P2 Group</h1>
-<h2>TSAI is The School Of AI run by  Rohan Sharavan. Rohan's perspectve is to build India a better place to live and work for our upcoming generations.</h2>
-<h3>Under TSAI we have been trained on the newest cutting edge CNN & DNN models. These models have proven to be SOTA models in specific domains. We have created this page to give a glance to the world of how we started using SOTA to resolve some domain oriented problems</h3>
-<h4 class="header2">Group Members : <a href="https://www.linkedin.com/in/rohitrnath/" target="_blank">Rohit R Nath</a>, <a href="https://www.linkedin.com/in/ganji-rao-0b58717/" target="_blank">Ganji Rao</a>,  <a href="https://www.linkedin.com/in/varinder-singh-sandhu-4375516b/" target="_blank">Varinder Sandhu</a> </h4>
+<div id="generators" class="flex-containers">
 
-	<p> Our journey started with deploying a pretrained model on MobileNetV2 on AWS Lambda. We used pytorch preatrainded MobilenetV2 model saved it's weights into S3 Bucket. Model file code is deployed into lamda as handle.py with an active API gateway which listens to a HTTP endpoint accepts a POST request with an image as a Http message body to classify the image.</p>
+<div id="gans" class="resnet">
+<form action="/action_page.php">
+	<p class="sessionHeader" style="font-size:20px">Generative Adversial Networks (GANS)</p>
+  
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/gans.png" alt="" width="10%" height="20%">
+	</p>
+  <input type="button" id="gansGenerateBtn" class="button" value="generate">
+  
+  <output id="filePreviewGANS"></output>
+</form>
+<p id="gansresult"></p>
+
 </div>
+
+
+<div id="vae" class="resnet">
+<form action="/action_page.php">
+	<p class="sessionHeader" style="font-size:20px">Variational AutoEncoders (VAE)</p>
+  
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/vae.png" alt="" width="10%" height="20%">
+	</p>
+  
+  <label for="minbeds">Choose lambda value</label>
+  
+  <select name="lambda" id="lambda">
+	<option>0</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+	<option>7</option>
+	<option>8</option>
+	<option>9</option>
+	<option>10</option>
+	<option>11</option>
+  </select>
+  
+  <output id="filePreviewVAE"></output>
+      
+  <input type="file" id="vaeFileUpload" name="vaeFileUpload" class="browseButton">
+    <label class ="label" for="vaeFileUploadBtn"></label><br><br>
+<input type="button" id="vaeFileUploadBtn" class="button" value="generate">
+
+  		
+</form>
+<p id="vaeresult"></p>
+
+</div>
+
+</div>
+
+
 
 </div>
 
 
 </body>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/upload.js"></script>
 
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.761.0.min.js"></script>
+<script src="js/upload.js"></script>
 
 </html> 
