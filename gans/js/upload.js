@@ -227,18 +227,20 @@ function doGenerate_VAE(evt) {
 		return alert('Please choose a file to upload first')
 	}
 	var lambda = $('#lambda').val();
-	alert(lambda)
 	var file = fileInput[0]
 	var filename = file.name;
+	
 	var formData = new FormData()
 	formData.append(filename, file)
+	formData.append('lambda', lambda)
 	console.log(filename)
+	console.log(lambda)
 	
 	$.ajax({
 		async: true,
 		crossDomain: true,
 		method: 'POST',
-		url: 'https://udt4qmcb52.execute-api.ap-south-1.amazonaws.com/dev/vae',
+		url: 'https://db0cvsqkq1.execute-api.ap-south-1.amazonaws.com/dev/vae',
 		data: formData,
 		processData: false,
 		contentType: false,
@@ -246,7 +248,8 @@ function doGenerate_VAE(evt) {
 	})
 	.done(function (response){
 		console.log(response);
-		document.getElementById('vaeresult').textContent = response;
+		//document.getElementById('vaeresult').textContent = response;
+		$("#vaeImageResult").attr('src', `data:image/png;base64,${JSON.parse(response)["vae"]}`);
 	})
 	.fail(function(){
 		alert("There was an error while sending prediction request to Pose Estimation model.");
@@ -254,44 +257,21 @@ function doGenerate_VAE(evt) {
 };
 
 function doGenerate_GANS(evt){
-	$scope.s3Url = 'https://s3-<region>.amazonaws.com/myBucket/';
 	
-	var bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
-	
-	bucket.listObjects(function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-      $scope.allImageData = data.Contents;
-    }
-  });
-  
 	for (var i = 0; i < 10; i++){
 		
-		var formData = new FormData()
-		num = 7*i;
-		if (num > 68) {
-			num = 68
-		}
-		file = num + ".png";
-		formData.append(filename, file)
-		console.log(filename)
-		url_path = "https://s3.ap-south-1.amazonaws.com/ganji.facealign/generated/" + num+".png";
-		alert(url)
 		$.ajax({
 			async: true,
 			crossDomain: true,
 			method: 'POST',
-			url: url_path,
-			data: formData,
+			url: 'https://db0cvsqkq1.execute-api.ap-south-1.amazonaws.com/dev/gans',
 			processData: false,
 			contentType: false,
 			mimeType: "multipart/form-data"
 		})
 		.done(function (response){
 			console.log(response);
-			$("#faceswapimg").attr('src', `data:image/png;base64,${JSON.parse(response)["face-swap"]}`);
+			$("#gansImageResult").attr('src', `data:image/png;base64,${JSON.parse(response)["gans"]}`);
 		})
 		.fail(function(){
 			alert("There was an error while sending prediction request to Pose Estimation model.");
@@ -432,6 +412,7 @@ document.getElementById("imagecontainer").style.display = "block";
 
 //displayhome();
 generators()
+//poseestimation()
 $(function() {
     $('a.popper').hover(function() {
         $('#pop').toggle();
