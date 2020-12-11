@@ -220,9 +220,38 @@ body {font-family: Arial, Helvetica, sans-serif;}
       <div class="dropdown-content">
       <a href="#gans" onclick="gans()">Generative Adversial Networks (GANS)</a>
       <a href="#vae" onclick="vae()">Variatonal Auto Encoders (VAE)</a>
+	  <a href="#srgan" onclick="srgan()">Super Resolution Generative Adversial Networks</a>
+	  <a href="#nst" onclick="nst()">Neural Style Transfer</a>
     </div>
   </div>
   
+  <div class="dropdown">
+    <button class="dropbtn"  onclick="nlp_attension()"> Neural Word Embeddings
+      <i class="fa fa-caret-down"></i>
+    </button>
+      <div class="dropdown-content">
+      <a href="#nlp-bert" onclick="nlp_bert()"> BERT - Question and Answers </a>
+	  <a href="#nlp-transformers" onclick="iwslt_translate_attension()"> IWSLT - German to English Translation </a>
+    </div>
+  </div>
+  
+  <div class="dropdown">
+    <button class="dropbtn"  onclick="nlp_imagecaption()"> Image Captioning
+      <i class="fa fa-caret-down"></i>
+    </button>
+      <div class="dropdown-content">
+      <a href="#nlp-image-caption" onclick="nlp_imagecaption()"> Image Captioning </a>
+    </div>
+  </div>
+  
+  <div class="dropdown">
+    <button class="dropbtn"  onclick="speech_to_text()"> Speech To Text
+      <i class="fa fa-caret-down"></i>
+    </button>
+      <div class="dropdown-content">
+      <a href="#nlp-ai-sound" onclick="speech_to_text()"> Speech To Text </a>
+    </div>
+  </div>
   
 </div>
 
@@ -243,8 +272,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </div>
 </div>
 </div>
-
-
 
 <div class="flex-child">
 
@@ -289,6 +316,42 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div id="vaeImage" class="resnet">
 	<p class="sessionHeader" style="font-size:15px">Variational Auto Encoders (VAE)</p>
 	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/vae.png" alt="" width="35%" height="70%" onclick="vae()">
+</div>
+
+<div id="srganImage" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Super Resolution Generative Adversial Networks (SRGAN)</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/srgan.jpeg" alt="" width="35%" height="70%" onclick="vae()">
+</div>
+
+
+<div id="nstImage" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Neural Style Transfer Algorithms</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/nst.png" alt="" width="35%" height="70%" onclick="vae()">
+</div>
+
+
+</div>
+</div>
+
+
+<div class="flex-child">
+<div id="nlp" class="flex-container">
+
+<div id="embeddings" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Neural Word Embeddings</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/neural_embedding.jpg" alt="" width="35%" height="70%" onclick="textanalysis()">
+</div>
+
+
+</div>
+</div>
+
+
+<div class="flex-child">
+<div id="image_caption" class="flex-container">
+<div id="nlp_image_caption" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Image Captionings</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/image-caption.png" alt="" width="35%" height="70%" onclick="imagecaptioning()">
 </div>
 </div>
 </div>
@@ -405,6 +468,60 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div id="generators" class="flex-containers">
 
+
+<div id="srgan" class="resnet">
+<form action="/action_page.php">
+	<p class="sessionHeader" style="font-size:20px">Super Resolution Generative Adversial Networks</p>
+  
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/srgan.jpeg" alt="" width="20%" height="30%">
+	</p>
+ 
+    
+<input type="button" id="srganFileUploadBtn" class="button" value="generate">
+
+  		
+</form>
+</p>
+<img id="srganImageResultLow" src="" width="150" > Low Resolution </img>
+</p>
+<img id="srganImageResultFake" src="" width="150" > High Resolution Fake </img>
+</p>
+<img id="srganImageResultReal" src="" width="150" > High Resolution Real </img>
+
+<p id="srganresult"></p>
+
+</div>
+
+<div id="nst" class="resnet">
+<form action="/action_page.php">
+	<p class="sessionHeader" style="font-size:20px">Neural Style Transfer</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/nst.png" alt="" width="20%" height="30%">
+	</p>
+    
+  
+  <p>
+  <output id="filePreviewnstStyle"></output>
+   <label class ="label" for="nstStyleFileUploadBtn">upload style image</label>  
+  <input type="file" id="nstStyleFileUpload" name="nstStyleFileUpload" class="browseButton">
+  </p>  
+    
+	<p>
+<output id="filePreviewnstContent"></output>  
+   <label class ="label" for="nstContentFileUploadBtn">upload content image</label>   
+  <input type="file" id="nstContentFileUpload" name="nstContentFileUpload" class="browseButton">
+    </p>
+	
+<input type="button" id="nstFileUploadBtn" class="button" value="generate">
+
+  		
+</form>
+<img id="nstImageResult" src="" width="150" >  </img>
+
+<p id="nstresult"></p>
+
+</div>
+
+
 <div id="gans" class="resnet">
 <form action="/action_page.php">
 	<p class="sessionHeader" style="font-size:20px">Generative Adversial Networks (GANS)</p>
@@ -433,17 +550,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
   
   <select name="lambda" id="lambda">
 	<option>0</option>
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    <option>6</option>
-	<option>7</option>
-	<option>8</option>
-	<option>9</option>
-	<option>10</option>
-	<option>11</option>
+    <option>0.1</option>
+    <option>0.2</option>
+    <option>0.3</option>
+    <option>0.4</option>
+    <option>0.5</option>
+    <option>0.6</option>
+	<option>0.7</option>
+	<option>0.8</option>
+	<option>0.9</option>
+	<option>1.0</option>
+	<option>1.1</option>
   </select>
   
   <output id="filePreviewVAE"></output>
@@ -458,10 +575,81 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <p id="vaeresult"></p>
 
-</div>
+</div>;'
 
 </div>
 
+
+<div id="nlp_embeddings" class="flex-container">
+
+<div id="nlp_bert_div" class="resnet">
+<form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/neural_embedding.jpg" alt="" width="10%" height="20%">
+	<p class="sessionHeader" style="font-size:20px">BERT Question and Answers</p>
+	
+	<output type="text" name="sample"> example: {"context":"Dog has 2 puppies", "question":"How many puppies that Dog has ?"} </output><br><br>
+  
+	<input type="text" id="id_nlp-context" name="context"> Give a Context and Question in Json</input><br><br>
+	
+	<input type="button" id="nlp_bertBtn" class="button" value="Answer">
+</form>
+<p id="nlp_bert_answer"></p>
+</div>
+
+
+<div id="nlp_transformers_div" class="resnet">
+<form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/neural_embedding.jpg" alt="" width="10%" height="20%">
+	<p class="sessionHeader" style="font-size:20px">IWSLT - German to English Translation</p>
+	
+	<input type="text" id="id_nlp-german" name="context"> Enter a German Text </input><br><br>
+	
+	<input type="button" id="nlp_transformersBtn" class="button" value="Translate">
+</form>
+<p id="nlp_transformers_output"></p>
+</div>
+
+
+</div>
+
+<div id="nlp_imagecaption" class="flex-container">
+
+<div id="nlp_imagecaption_div" class="resnet">
+<form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/image-caption.png" alt="" width="10%" height="20%">
+	<p class="sessionHeader" style="font-size:20px">Photo caption</p>
+	
+	<output id="filePreviewImageCaption"></output>
+      
+	<input type="file" id="imageCaptionFileUpload" name="imageCaptionFileUpload" class="browseButton">
+    <label class ="label" for="imageCaptionFileUploadBtn"></label><br><br>
+
+	
+	<input type="button" id="imageCaptionBtn" class="button" value="Caption">
+</form>
+<p id="nlp_imagecaption_answer"></p>
+</div>
+</div>
+
+
+<div id="ai_sound" class="flex-container">
+
+<div id="ai_sound_div" class="resnet">
+<form action="/action_page.php">
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/ai-sound.png" alt="" width="10%" height="20%">
+	<p class="sessionHeader" style="font-size:20px">Speech To Text</p>
+	
+	<input type="file" id="aiSoundFileUpload" name="aiSoundFileUpload" class="browseButton">
+	<audio id="filePreviewAISound" src="" width="150" >  </audio>
+
+    <label class ="label" for="aiSoundFileUploadBtn"></label><br><br>
+
+	<input type="button" id="aiSoundBtn" class="button" value="SpeechToText">
+</form>
+
+<p id="ai_sound_answer"></p>
+</div>
+</div>
 
 
 </div>
@@ -470,6 +658,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </body>
 
 <script src="../js/jquery-3.3.1.min.js"></script>
-<script src="js/upload.js?v=1.1"></script>
+<script src="js/upload.js?v=1.4"></script>
 
 </html> 

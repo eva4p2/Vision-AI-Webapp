@@ -215,10 +215,8 @@ function uploadAndDoPoseEstimation() {
 		$("#poseestimationImageResult").attr('src', `data:image/png;base64,${JSON.parse(response)["hpe"]}`);
 		//document.getElementById('poseestimationresult').textContent = response;
 	})
-	.fail(function(response){
-		//alert("There was an error while sending prediction request to Pose Estimation model.");
-		alert(response)
-		document.getElementById('poseestimationresult').textContent = response;
+	.fail(function(){
+		alert("There was an error while sending prediction request to Pose Estimation model.");
 	});
 };
 
@@ -258,6 +256,85 @@ function doGenerate_VAE(evt) {
 	});
 };
 
+
+function doGenerate_SRGAN(evt) {
+
+	/*var fileInput = document.getElementById('srganFileUpload').files;
+	if (!fileInput.length) {
+		return alert('Please choose a file to upload first')
+	}
+	var file = fileInput[0]
+	var filename = file.name;
+	
+	var formData = new FormData()
+	formData.append(filename, file)
+	console.log(filename)
+	*/
+	$.ajax({
+		async: true,
+		crossDomain: true,
+		method: 'POST',
+		url: 'https://rr6wq5je98.execute-api.ap-south-1.amazonaws.com/dev/srgans',
+		processData: false,
+		contentType: false,
+		mimeType: "multipart/form-data"
+	})
+	.done(function (response){
+		console.log(response);
+		//document.getElementById('vaeresult').textContent = response;
+		$("#srganImageResultLow").attr('src', `data:image/png;base64,${JSON.parse(response)["low_res"]}`);
+		$("#srganImageResultFake").attr('src', `data:image/png;base64,${JSON.parse(response)["highres_fake"]}`);
+		$("#srganImageResultReal").attr('src', `data:image/png;base64,${JSON.parse(response)["highres_real"]}`);
+	})
+	.fail(function(){
+		alert("There was an error while sending prediction request to Pose Estimation model.");
+	});
+};
+
+function doGenerate_NST(evt) {
+
+	var fileInput = document.getElementById('nstStyleFileUpload').files;
+	if (!fileInput.length) {
+		return alert('Please choose a Style image to upload first')
+	}
+	var file = fileInput[0]
+	var filenameStyle = file.name;
+	
+	var fileInput2 = document.getElementById('nstContentFileUpload').files;
+	if (!fileInput2.length) {
+		return alert('Please choose a Content image to upload first')
+	}
+	var file2 = fileInput2[0]
+	var filenameContent = file2.name;
+	
+	
+	var formData = new FormData()
+	formData.append(filenameStyle, file)
+	formData.append(filenameContent, file2)
+	console.log(filenameStyle)
+	console.log(filenameContent)
+	
+	
+	$.ajax({
+		async: true,
+		crossDomain: true,
+		method: 'POST',
+		url: 'https://db0cvsqkq1.execute-api.ap-south-1.amazonaws.com/dev/nst',
+		data: formData,
+		processData: false,
+		contentType: false,
+		mimeType: "multipart/form-data"
+	})
+	.done(function (response){
+		console.log(response);
+		//document.getElementById('vaeresult').textContent = response;
+		$("#nstImageResult").attr('src', `data:image/png;base64,${JSON.parse(response)["nst"]}`);
+	})
+	.fail(function(){
+		alert("There was an error while sending prediction request to Pose Estimation model.");
+	});
+};
+
 function doGenerate_GANS(evt){
 	
 	for (var i = 0; i < 10; i++){
@@ -280,6 +357,7 @@ function doGenerate_GANS(evt){
 		});
 	}
 };
+
 function handleFileSelectFaceAlignment(evt) {
 	var files = evt.target.files;
 	var f = files[0];
@@ -381,6 +459,58 @@ var files = evt.target.files;
 
 }
 
+
+function handleFileSelectSRGAN(evt){
+
+var files = evt.target.files;
+	var f = files[0];
+	var reader = new FileReader();
+	 
+	  reader.onload = (function(theFile) {
+			return function(e) {
+			  document.getElementById('filePreviewSRGAN').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="150" />'].join('');
+			};
+	  })(f);
+	   
+	  reader.readAsDataURL(f);
+
+}
+
+
+function handleFileSelectnstStyle(evt){
+
+var files = evt.target.files;
+	var f = files[0];
+	var reader = new FileReader();
+	 
+	  reader.onload = (function(theFile) {
+			return function(e) {
+			  document.getElementById('filePreviewnstStyle').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="150" />'].join('');
+			};
+	  })(f);
+	   
+	  reader.readAsDataURL(f);
+
+}
+
+
+function handleFileSelectnstContent(evt){
+
+var files = evt.target.files;
+	var f = files[0];
+	var reader = new FileReader();
+	 
+	  reader.onload = (function(theFile) {
+			return function(e) {
+			  document.getElementById('filePreviewnstContent').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="150" />'].join('');
+			};
+	  })(f);
+	   
+	  reader.readAsDataURL(f);
+
+}
+
+
 $('#resnet34FileUploadBtn').click(uploadAndClassifyImageUsingResnet);
 $('#mobilenetv2FleUploadBtn').click(uploadAndClassifyImageUsingMobilenetv2);
 $('#facealignmentFileUploadBtn').click(uploadAndAlignFace);
@@ -391,6 +521,8 @@ $('#poseEstimationFileUploadBtn').click(uploadAndDoPoseEstimation);
 
 $('#vaeFileUploadBtn').click(doGenerate_VAE);
 $('#gansGenerateBtn').click(doGenerate_GANS);
+$('#srganFileUploadBtn').click(doGenerate_SRGAN);
+$('#nstFileUploadBtn').click(doGenerate_NST);
 
 
 document.getElementById('facerecognitionFileUpload').addEventListener('change', handleFileSelectFaceRecognition, false);
@@ -402,19 +534,21 @@ document.getElementById('mobilenetv2FileUpload').addEventListener('change', hand
 document.getElementById('resnet34FileUpload').addEventListener('change', handleFileSelectResnet, false);
 document.getElementById('poseEstimationFileUpload').addEventListener('change', handleFileSelectPoseEstimation, false);
 document.getElementById('vaeFileUpload').addEventListener('change', handleFileSelectVAE, false);
-
+document.getElementById('nstStyleFileUpload').addEventListener('change', handleFileSelectnstStyle, false);
+document.getElementById('nstContentFileUpload').addEventListener('change', handleFileSelectnstContent, false);
 
 document.getElementById("classification").style.display = "none";
 document.getElementById("facedetect").style.display = "none";
 document.getElementById("facerecognition").style.display = "none";
 document.getElementById("poseestimation").style.display = "none";
 document.getElementById("generators").style.display = "none";
+document.getElementById("srgan").style.display = "none";
 
 document.getElementById("imagecontainer").style.display = "block";
 
 //displayhome();
-//generators()
-poseestimation()
+generators()
+//poseestimation()
 $(function() {
     $('a.popper').hover(function() {
         $('#pop').toggle();
@@ -444,6 +578,8 @@ document.getElementById("facerecognition").style.display = "none";
 
 document.getElementById("poseestimation").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 }
 
@@ -460,9 +596,11 @@ document.getElementById("poseestimation").style.display = "none";
 
 document.getElementById("gans").style.display = "none";
 document.getElementById("vae").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
-document.getElementById("generators").style.display = "none"; //keep it last
 document.getElementById("classification").style.display = "none"; //keep it last
+document.getElementById("generators").style.display = "none"; //keep it last
 
 }
 
@@ -497,6 +635,8 @@ document.getElementById("faceswap").style.display = "none";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 }
 
@@ -508,6 +648,8 @@ document.getElementById("mobilenetV2").style.display = "none";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 }
 
@@ -518,6 +660,8 @@ document.getElementById("mobilenetV2").style.display = "block";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 }
 
@@ -532,6 +676,8 @@ document.getElementById("faceswap").style.display = "none";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 document.getElementById("poseestimation").style.display = "block";
 }
@@ -545,6 +691,8 @@ document.getElementById("poseestimation").style.display = "none";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 document.getElementById("facealignment").style.display = "block";
 document.getElementById("faceswap").style.display = "block";
@@ -563,6 +711,8 @@ document.getElementById("poseestimation").style.display = "none";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 document.getElementById("faceswap").style.display = "block";
 document.getElementById("facedetect").style.display = "block";
@@ -581,6 +731,8 @@ document.getElementById("facerecognition").style.display = "none";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 document.getElementById("facedetect").style.display = "block";
 
@@ -597,6 +749,8 @@ document.getElementById("poseestimation").style.display = "none";
 document.getElementById("generators").style.display = "none";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 document.getElementById("facerecognition").style.display = "block";
 
@@ -615,6 +769,8 @@ document.getElementById("facerecognition").style.display = "none";
 document.getElementById("generators").style.display = "block";
 document.getElementById("vae").style.display = "none";
 document.getElementById("gans").style.display = "block";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
 
 }
 
@@ -631,6 +787,43 @@ document.getElementById("facerecognition").style.display = "none";
 document.getElementById("generators").style.display = "block";
 document.getElementById("gans").style.display = "none";
 document.getElementById("vae").style.display = "block";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "none";
+
+}
+
+
+function srgan(){
+document.getElementById("imagecontainer").style.display = "none";
+
+document.getElementById("classification").style.display = "none";
+document.getElementById("facealignment").style.display = "none";
+document.getElementById("faceswap").style.display = "none";
+document.getElementById("poseestimation").style.display = "none";
+document.getElementById("facerecognition").style.display = "none";
+
+document.getElementById("generators").style.display = "block";
+document.getElementById("gans").style.display = "none";
+document.getElementById("vae").style.display = "none";
+document.getElementById("nst").style.display = "none";
+document.getElementById("srgan").style.display = "block";
+
+}
+
+function nst(){
+document.getElementById("imagecontainer").style.display = "none";
+
+document.getElementById("classification").style.display = "none";
+document.getElementById("facealignment").style.display = "none";
+document.getElementById("faceswap").style.display = "none";
+document.getElementById("poseestimation").style.display = "none";
+document.getElementById("facerecognition").style.display = "none";
+
+document.getElementById("generators").style.display = "block";
+document.getElementById("gans").style.display = "none";
+document.getElementById("vae").style.display = "none";
+document.getElementById("srgan").style.display = "none";
+document.getElementById("nst").style.display = "block";
 
 }
 
@@ -648,4 +841,7 @@ document.getElementById("faceswap").style.display = "none";
 document.getElementById("generators").style.display = "block";
 document.getElementById("gans").style.display = "block";
 document.getElementById("vae").style.display = "block";
+document.getElementById("srgan").style.display = "block";
+document.getElementById("nst").style.display = "block";
+
 }

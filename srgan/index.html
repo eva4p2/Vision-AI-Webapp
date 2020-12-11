@@ -220,9 +220,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
       <div class="dropdown-content">
       <a href="#gans" onclick="gans()">Generative Adversial Networks (GANS)</a>
       <a href="#vae" onclick="vae()">Variatonal Auto Encoders (VAE)</a>
+	  <a href="#srgan" onclick="srgan()">Super Resolution Generative Adversial Networks</a>
+	  <a href="#nst" onclick="nst()">Neural Style Transfer</a>
     </div>
   </div>
-  
   
 </div>
 
@@ -290,6 +291,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
 	<p class="sessionHeader" style="font-size:15px">Variational Auto Encoders (VAE)</p>
 	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/vae.png" alt="" width="35%" height="70%" onclick="vae()">
 </div>
+
+<div id="srganImage" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Super Resolution Generative Adversial Networks (SRGAN)</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/srgan.jpeg" alt="" width="35%" height="70%" onclick="vae()">
+</div>
+
+
+<div id="nstImage" class="resnet">
+	<p class="sessionHeader" style="font-size:15px">Neural Style Transfer Algorithms</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/nst.png" alt="" width="35%" height="70%" onclick="vae()">
+</div>
+
+
 </div>
 </div>
 
@@ -405,6 +419,60 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div id="generators" class="flex-containers">
 
+
+<div id="srgan" class="resnet">
+<form action="/action_page.php">
+	<p class="sessionHeader" style="font-size:20px">Super Resolution Generative Adversial Networks</p>
+  
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/srgan.jpeg" alt="" width="20%" height="30%">
+	</p>
+ 
+    
+<input type="button" id="srganFileUploadBtn" class="button" value="generate">
+
+  		
+</form>
+</p>
+<img id="srganImageResultLow" src="" width="150" > Low Resolution </img>
+</p>
+<img id="srganImageResultFake" src="" width="150" > High Resolution Fake </img>
+</p>
+<img id="srganImageResultReal" src="" width="150" > High Resolution Real </img>
+
+<p id="srganresult"></p>
+
+</div>
+
+<div id="nst" class="resnet">
+<form action="/action_page.php">
+	<p class="sessionHeader" style="font-size:20px">Neural Style Transfer</p>
+	<img src="https://s3.ap-south-1.amazonaws.com/ganji.facealign/images/nst.png" alt="" width="20%" height="30%">
+	</p>
+    
+  
+  <p>
+  <output id="filePreviewnstStyle"></output>
+   <label class ="label" for="nstStyleFileUploadBtn">upload style image</label>  
+  <input type="file" id="nstStyleFileUpload" name="nstStyleFileUpload" class="browseButton">
+  </p>  
+    
+	<p>
+<output id="filePreviewnstContent"></output>  
+   <label class ="label" for="nstContentFileUploadBtn">upload content image</label>   
+  <input type="file" id="nstContentFileUpload" name="nstContentFileUpload" class="browseButton">
+    </p>
+	
+<input type="button" id="nstFileUploadBtn" class="button" value="generate">
+
+  		
+</form>
+<img id="nstImageResult" src="" width="150" >  </img>
+
+<p id="nstresult"></p>
+
+</div>
+
+
 <div id="gans" class="resnet">
 <form action="/action_page.php">
 	<p class="sessionHeader" style="font-size:20px">Generative Adversial Networks (GANS)</p>
@@ -433,17 +501,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
   
   <select name="lambda" id="lambda">
 	<option>0</option>
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    <option>6</option>
-	<option>7</option>
-	<option>8</option>
-	<option>9</option>
-	<option>10</option>
-	<option>11</option>
+    <option>0.1</option>
+    <option>0.2</option>
+    <option>0.3</option>
+    <option>0.4</option>
+    <option>0.5</option>
+    <option>0.6</option>
+	<option>0.7</option>
+	<option>0.8</option>
+	<option>0.9</option>
+	<option>1.0</option>
+	<option>1.1</option>
   </select>
   
   <output id="filePreviewVAE"></output>
